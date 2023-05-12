@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="Roger Feliu Serramitja">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Robot submarí GIRONA 25</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/button.css">
+    <link rel="stylesheet" href="css/loading.css">
+    <link rel="stylesheet" href="css/gpcon.css">
+
+    <!-- JS -->
+    <script src="js/paho.javascript-1.0.3/paho-mqtt.js" type="text/javascript"></script>
+    <script src="js/intro_host.js" type="text/javascript"></script>
+    <script src="js/motor.js"></script>
+    <script src="js/ui.js" type="text/javascript"></script>
+    <script src="js/keyboard.js" type="text/javascript"></script>
+    <script src="js/joystick.js" type="text/javascript"></script>
+    <script src="js/mqtt.js" type="text/javascript"></script>
+    <script src="js/stream.js"></script>
+    <script src="js/libhtml.js"></script>
+    <script src="js/libgp.js"></script>
+    <script src="js/gpcon.js"></script>
+    <!--
+    <style>
+      #ultim + div{
+          visibility: hidden;
+      }
+  </style>
+    -->
+  </head>
+  <body>
+    <div class="loading-overlay" id="loading-overlay">
+      <div class="center">
+        <div style="margin-top: 3em">
+          <div class="loading-container">
+            <div class="loading"></div>
+            <div id="loading-text">Connecting</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="button-panel top-left estat-cont" id="estat-cont">
+      <div class="center">
+        <div id="estat" class="estat">
+          A message goes here. にゃー
+        </div>
+      </div>
+    </div>
+
+    <div class="pantalla center" style="display: flex">
+      <div>
+        <h1>Robot submarí</h1>
+        <div>Loading ^.^</div>
+      </div>
+    </div>
+
+    <div class="pantalla" id="intro">
+      <div class="center intro">
+        <div class="login-cont">
+          <h1 class="banner">GIRONA 25</h1>
+
+          <div style="height: 2em"></div>
+
+          <input class= "hide" type="text" id="host-ip" placeholder="Host o IP del submarí"> <!-- class= "hide" -->
+
+          <div style="height: 2em"></div>
+
+          <button class="login" id="submit-ip" onclick="start_connection()">
+            Connectar
+          </button>
+        </div>
+      </div>
+      <div class="button-panel top-left">
+	  <button class="motor" id="fullscreen" onclick="change_fullscreen()" title="FullScreen" style="font-size: 2.5vw; padding-left: .1vw;" value="close">⇱</button>
+      </div>
+    </div>
+
+    <div class="main-content pantalla" id="panel">
+      <div>
+        <div class="stream" oncontextmenu="disable_contextmenu()">
+	        <img
+            class="interface"
+            id="streaming"
+            src="images/stream_off.png"
+            alt="Not image available"
+            onerror="stream_error()"
+          />
+          <img
+            class="hide interfaceDrt"
+            id="streaming1"
+            src="images/stream_off.png"
+            alt="Not image available"
+            onerror="stream_error()"
+          />
+          <img
+            class="hide interfaceEsq"
+            id="streaming2"
+            src="images/stream_off.png"
+            alt="Not image available"
+            onerror="stream_error()"
+          />
+        </div>
+        <div class="button-panel center-left mobile">
+          <div>
+            <div class="space">
+            </div>
+            <button style="margin-bottom: 10px;" class="motor move ull" id="up" ontouchstart="emerge()" ontouchend="stop()" title="Emerge">↑</button>
+          </div>
+          <button class="motor move ull" ontouchstart="left()" ontouchend="stop()" title="Left">←</button>
+          <div class="space2">
+          </div>
+          <button class="motor move ull" ontouchstart="right()" ontouchend="stop()" title="Right">→</button>
+          <div>
+            <div class="space">
+            </div>
+	        <button style="margin-top: 10px;" class="motor move ull" id="down" ontouchstart="immerse()" ontouchend="stop()" title="Immerse">↓</button>
+	        </div>
+          </div>
+        
+        <div class="button-panel bottom-left horitzontal">
+    <button class="motor mobile" id= "ulleres" onclick="realitat()" title="VR">🥽</button>
+	  <button class="motor follow ull" id="follow-button" onclick="follow()" title="Follow">🎈</button>
+    <button class="motor hold move ull" id="hold-button" onclick="depth_hold()" title="Depth hold">🚢</button>
+	  <button class="motor streaming ull" id="stream-button" onclick="stream()" title="Play/pause Stream">📺</button>
+	  <button class="motor camera ull" onclick="stream_screenshot()" title="Capture shot">📷</button>
+    <button class="motor video ull" id="video-button" onclick="stream_video()" title="Film">🎥</button>
+    <button class="motor ull" id= "light-button" onclick="light()" title="Light">🔦</button>
+    <button class="motor move ull" id= "velocity-button" onclick="velocity()" title="Velocitat">V1</button>
+        </div>
+        <div class="button-panel bottom-right horitzontal">
+    <button class="motor stop move ull" id= "stop" onclick="stop_raspy()" title="Stop">🛑</button>
+        </div>
+        
+        <div class="button-panel center-right move mobile">
+          <canvas id="joystick" class="joystick ull">
+            Wops. Canvas unsuported.
+          </canvas>
+        </div>
+
+        <div class="button-panel top-left">
+	  <button class="motor ull" id="fullscreen" onclick="change_fullscreen()" title="FullScreen" style="font-size: 2.5vw; padding-left: .1vw;" value="close">⇱</button>
+    <button class="motor ull" id="helpbut" onclick="ui_help()" title="Help">?</button>
+        </div>
+
+        <div class="help" id="help">
+          <div class="center">
+            <div class="helpbox">
+              <h1 class="banner">GIRONA 25</h1>
+              <div>Dreceres de teclat:</div>
+              <div id="help-keyboard" class="help-keyboard">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+    <img class= "imgA1" src="images/INC_BRU.PNG" id="imagetot">
+    <img class= "imgA2" src="images/ROLL.png" id="imageroll">
+    <img class= "imgA3" src="images/BRUIX.png" id="imagebruix">
+    <img class= "imgA4" src="images/PITCH.png" id="imagepitch">
+    <h1 class= "Temp">  Temperatura: <span id="temp"></span> ºC </h1>
+    <h1 class= "deep">  Profunditat: <span id="deep"></span> m </h1>
+    <h1 class= "BAT">  <span id="Nbat"></span> % </h1>
+    <img class= "imgB0" src="images/Bateria0.png" id="imageB0">
+    <img class= "imgB0" src="images/Bateria25.png" id="imageB25">
+    <img class= "imgB0" src="images/Bateria50.png" id="imageB50">
+    <img class= "imgB0" src="images/Bateria75.png" id="imageB75">
+    <img class= "imgB0" src="images/Bateria100.png" id="imageB100">
+        </div>
+        
+      </div>
+
+    </div>
+
+    <div id="sol" class="nodisp"></div>
+
+    <div id="prompt" class="nodisp">🔴</div>
+
+    <div id="main" class="nodisp">
+      <div class="motor">🟢</div>
+        <div id="button-bar">
+            <div id="button-bar-box" class="nodisp"></div>
+        </div>
+        <div id="gamepad-container">
+        </div>
+    </div>
+
+    <!-- Templates are copied for use when needed -->
+    <div id="templates">
+        <input id="template-button" type="button" class="selector-button">
+
+        <div id="template-gamepad" class="gamepad nodisp">
+            <div class="gamepad-title"></div>
+            <div class="gamepad-mapping"></div>
+            <div class="gamepad-id"></div>
+            <div class="gamepad-controls-center">
+                <div class="gamepad-controls">
+                    <div class="gamepad-buttons-box"></div>
+                    <div class="gamepad-axes-box"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="template-gamepad-button-container" class="gamepad-button-container">
+            <div class="gamepad-button"></div>
+            <div class="gamepad-button-label"></div>
+        </div>
+
+        <div id="template-gamepad-axis-pair-container" class="gamepad-axis-pair-container">
+            <div class="gamepad-axis-pair">
+                <div class="gamepad-circle nodisp"></div>
+                <div class="gamepad-axis-pip"></div>
+                <div class="gamepad-axis-crosshair">
+                    <div class="gamepad-axis-crosshair-v"></div>
+                    <div class="gamepad-axis-crosshair-h"></div>
+                </div>
+            </div>
+            <div class="gamepad-axis-pair-label"></div>
+            <div class="gamepad-axis-pair-value"></div>
+        </div>
+    </div>
+        <!--<div id="ultim"></div>-->
+  </body>
+</html>
+
+

@@ -1,0 +1,393 @@
+:root {
+    --button-background: linear-gradient(0deg, rgba(0,0,0,.8) 0%, rgba(0,0,0,.3) 100%);
+}
+
+body {
+    background: rgb(2,0,36);
+    background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,110,164,1) 100%);
+    background-size: 100vw 100vh;
+    height: 100vw;
+    width: 100vw;
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+
+.banner {
+    font-size: 3em;
+}
+
+.pantalla {
+    display: none;
+    top: 0;
+    left: 0;
+    position: fixed;
+    width: 100vw;
+}
+
+.pantalla > div {
+    height: 100vh;
+}
+
+div.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-cont {
+    color: white;
+}
+
+/* Inputs */
+
+input {
+    font-size: 1.5em;
+    width: calc(100% - 2em);
+    padding: .3em 1em .3em 1em;
+}
+
+div.checkbox {
+    display: block;
+    height: 1.3em;
+    font-size: 1.3em;
+    justify-content: flex-start;
+}
+div.checkbox > input {
+    width: .6em;
+    height: .6em;
+}
+div.checkbox > label {
+    display: inline;
+}
+
+/* State message */
+
+.estat-cont {
+    width: 100vw;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+.estat {
+    display: inline-block;
+    font-size: 1.2em;
+    color: white;
+    padding: .3em 1em .3em 1em;
+    background: var(--button-background);
+    border-radius: 0 0 .5em .5em;
+}
+
+/* Streaming video interface */
+
+.interface {
+    position: fixed;
+    top: 0%;
+    left: 0;
+    width: 100vw;
+    height: 100vw;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+#streaming {
+    object-fit: contain;
+    width: 100%;
+    height: 100vh;
+}
+    
+.interfaceEsq {
+    position: fixed;
+    top: 0;
+    right: 50%;
+    width: 50%;
+    height: 100vh;
+    object-fit: cover;
+    object-position: 30% 0;
+}
+#streaming2 {
+    height: 100vh;
+}
+
+.interfaceDrt {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100vh;
+    object-fit: cover;
+    object-position: 70% 0;
+}
+#streaming1 {
+    height: 100vh;
+}  
+
+
+
+/* Panel button areas */
+
+.button-panel {
+    position: fixed;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+.top-right {
+    top: 0;
+    right: 0;
+}
+
+.top-left {
+    top: 0;
+    left: 0;
+}
+
+.center-left {
+    top: 50%;
+    left: 0;
+    transform: translate(0, -50%);
+}
+
+.center-right {
+    top: 50%;
+    right: 0;
+    transform: translate(0, -50%);
+}
+
+.bottom-left {
+    bottom: 0;
+    left: 0;
+}
+
+.bottom-right {
+    bottom: 0;
+    right: 0;
+}
+
+.horitzontal {
+    display: flex;
+}
+
+/* Joystick */
+
+.joystick {
+    width: 20vw;
+    height: 20vw;
+}
+
+/* Misc */
+
+.botons.vert {
+    position: relative;
+    border: solid 1px;
+    text-align: center;
+    width: 20%;
+    height: 100%;
+}
+
+.botons.horitz {
+    position: relative;
+    border: solid 1px;
+    text-align: center;
+    width: 20%;
+    height: 100%;
+}
+
+/* Imatge */
+
+img.streaming-on {
+    /*transform: rotate(180deg);*/
+    transform: rotate(0deg);
+}
+img.imgA1{
+    position: fixed;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    top: 0px;
+    right: 0px;
+    z-index: 1;
+}
+img.imgA1M{
+    position: fixed;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    top: 0px;
+    right: 0px;
+    z-index: 1;
+    width: 198px;
+    height: 65px;
+}
+img.imgA2{
+    position: absolute;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    top: 30px;
+    right: 30px;
+    z-index: 3;
+    width: 110px;
+    height: 110px;
+}
+img.imgA2M{
+    position: absolute;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    top: 11px;
+    right: 11px;
+    z-index: 3;
+    width: 45px;
+    height: 45px;
+}
+img.imgA3{
+    position: fixed;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    top: 30px;
+    right: 197px;
+    z-index: 3;
+    width: 110px;
+    height: 110px;
+}
+img.imgA3M{
+    position: fixed;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    top: 11px;
+    right: 78.5px;
+    z-index: 3;
+    width: 45px;
+    height: 45px;
+}
+img.imgA4{
+    position: fixed;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    top: 30px;
+    right: 366px;
+    z-index: 3;
+    width: 110px;
+    height: 110px;
+}
+img.imgA4M{
+    position: fixed;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    top: 12px;
+    right: 145px;
+    z-index: 3;
+    width: 45px;
+    height: 45px;
+}
+
+.Temp{
+    position: fixed;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    top: 30%;
+    right: 0%;
+    z-index: 3;
+    font-size: 1em;
+    color: white;
+}
+.deep{
+    position: fixed;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    top: 35%;
+    right: 0%;
+    z-index: 3;
+    font-size: 1em;
+    color: white;
+}
+.BAT{
+    position: fixed;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    bottom: 38%;
+    right: 1%;
+    z-index: 3;
+    font-size: 1em;
+    color: white;
+}
+img.imgB0{
+    position: fixed;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    bottom: 18%;
+    right: -5%;
+    z-index: 3;
+    width: 10%;
+    height: 20%;
+}
+/* Help overlayer */
+
+.help {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    color: white;
+}
+
+.helpbox {
+    background: var(--button-background);
+    padding: .5em 2em 2em 2em;
+    border-radius: 1em;
+    margin-top: 3em;
+    z-index: 5;
+}
+
+.help-keyboard {
+    /* yup */
+}
+
+.help-keyboard > .row {
+    display: flex;
+    margin-top: .3em;
+    align-items: center;
+}
+
+.help-keyboard > .row > .keys {
+    display: flex;
+}
+
+.key {
+    border-style: solid;
+    border-color: white;
+    border-width: 1px;
+    margin-right: .3em;
+    padding: .2em;
+    min-width: 1.2em;
+    font-family: monospace;
+    text-align: center;
+}
+
+.help-keyboard > .row > .description {
+    width: 100%;
+    margin-left: 1em;
+}
+
+.hide {
+    display: none !important;
+}
+
+@media only screen and (orientation:portrait) {
+    body {
+      height: 100vw;
+      transform: rotate(90deg);
+    }
+}
