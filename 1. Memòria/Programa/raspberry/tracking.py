@@ -58,7 +58,11 @@ while True:
         cv2.putText(frame, '{},{}'.format(x,y),(x+10,y), font, 0.75,(0,255,0),1,cv2.LINE_AA)
         nuevoContorno = cv2.convexHull(c)
         cv2.drawContours(frame, [nuevoContorno], 0, (255,0,0), 3)
-        if (area>25000):
+        if (area>30000):
+            msg = "bkd"
+            client.publish(topic, json.dumps([msg, 0.15, 0.15]))
+            print('enrera')
+        elif (area>10000):
             msg = "stop"
             client.publish(topic, json.dumps([msg]))
             print('stop')

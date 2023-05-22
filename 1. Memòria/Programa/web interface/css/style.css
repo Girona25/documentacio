@@ -17,6 +17,12 @@ body {
 .banner {
     font-size: 3em;
 }
+.banner1 {
+    font-size: 5em;
+    background: -webkit-linear-gradient(#8d8c8c, #ff7c11);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
 .pantalla {
     display: none;
