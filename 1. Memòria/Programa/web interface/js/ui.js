@@ -281,6 +281,8 @@ function apply_notmobile() {
   var image3 = document.getElementById("imagepitch");
   image3.classList.remove("imgA4");
   image3.classList.add("imgA4M");
+  var image4 = document.getElementById("logo");
+  image4.classList.add("logoM");
 }
 function amagarjoy() {
   for (let elem of document.getElementsByClassName("gamepad"))

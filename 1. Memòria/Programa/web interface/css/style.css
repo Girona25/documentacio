@@ -4,7 +4,7 @@
 
 body {
     background: rgb(2,0,36);
-    background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,110,164,1) 100%);
+    background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 50%, rgba(0,110,164,1) 100%);
     background-size: 100vw 100vh;
     height: 100vw;
     width: 100vw;
@@ -18,7 +18,7 @@ body {
     font-size: 3em;
 }
 .banner1 {
-    font-size: 5em;
+    font-size: 3em;
     background: -webkit-linear-gradient(#8d8c8c, #ff7c11);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -206,6 +206,10 @@ div.checkbox > label {
 img.streaming-on {
     /*transform: rotate(180deg);*/
     transform: rotate(0deg);
+}
+img.logoM{
+    width: 400px;
+    height: 100px;
 }
 img.imgA1{
     position: fixed;
